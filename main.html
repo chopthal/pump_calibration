@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://cdn.plot.ly/plotly-2.17.1.min.js"></script>
+    <script src="main.js" defer></script>
   </head>
   <body>
     <div>
@@ -20,21 +22,21 @@
           </div>
           <div>
             <p>Flow Rate</p>
-            <input type="number" placeholder="30" id="fr1-low" />
-            <input type="number" placeholder="50" id="fr1-medium" />
-            <input type="number" placeholder="70" id="fr1-high" />
+            <input type="number" id="fr1-low" value="12" />
+            <input type="number" id="fr1-medium" value="20" />
+            <input type="number" id="fr1-high" value="28" />
           </div>
           <div>
             <p>Flow Rate (#2)</p>
-            <input type="number" placeholder="30" id="fr2-low" />
-            <input type="number" placeholder="50" id="fr2-medium" />
-            <input type="number" placeholder="70" id="fr2-high" />
+            <input type="number" id="fr2-low" value="10" />
+            <input type="number" id="fr2-medium" value="22" />
+            <input type="number" id="fr2-high" value="26.5" />
           </div>
           <div>
             <p>Flow Rate (#3)</p>
-            <input type="number" placeholder="30" id="fr3-low" />
-            <input type="number" placeholder="50" id="fr3-medium" />
-            <input type="number" placeholder="70" id="fr3-high" />
+            <input type="number" id="fr3-low" />
+            <input type="number" id="fr3-medium" />
+            <input type="number" id="fr3-high" />
           </div>
         </div>
       </div>
@@ -63,5 +65,6 @@
     <div>
       <button>Calculate</button>
     </div>
+    <div id="axes" style="width: 700px; height: 300px"></div>
   </body>
 </html>
