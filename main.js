@@ -25,45 +25,6 @@ const resultRpm3Input = document.querySelector("#result-rpm3");
 const resultRpm4Input = document.querySelector("#result-rpm4");
 const resultRpm5Input = document.querySelector("#result-rpm5");
 
-const rpmLow = parseFloat(rpmLowInput.value || rpmLowInput.placeholder);
-const rpmMedium = parseFloat(
-  rpmMediumInput.value || rpmMediumInput.placeholder
-);
-const rpmHigh = parseFloat(rpmHighInput.value || rpmHighInput.placeholder);
-
-const frLow1 = parseFloat(frLow1Input.value);
-const frLow2 = parseFloat(frLow2Input.value);
-const frLow3 = parseFloat(frLow3Input.value);
-
-const frMedium1 = parseFloat(frMedium1Input.value);
-const frMedium2 = parseFloat(frMedium2Input.value);
-const frMedium3 = parseFloat(frMedium3Input.value);
-
-const frHigh1 = parseFloat(frHigh1Input.value);
-const frHigh2 = parseFloat(frHigh2Input.value);
-const frHigh3 = parseFloat(frHigh3Input.value);
-
-const targetFr1 = parseFloat(
-  targetFr1Input.value || targetFr1Input.placeholder
-);
-const targetFr2 = parseFloat(
-  targetFr2Input.value || targetFr2Input.placeholder
-);
-const targetFr3 = parseFloat(
-  targetFr3Input.value || targetFr3Input.placeholder
-);
-const targetFr4 = parseFloat(
-  targetFr4Input.value || targetFr4Input.placeholder
-);
-const targetFr5 = parseFloat(
-  targetFr5Input.value || targetFr5Input.placeholder
-);
-
-const data = {
-  x: [],
-  y: [],
-};
-
 const utils = {
   sum: (arr) => arr.reduce((total, amount) => total + amount),
   avg: (arr) => utils.sum(arr) / arr.length,
@@ -125,28 +86,75 @@ function rSquared(x, y, coefficients) {
   return 1 - regressionSquaredError / totalSquaredError;
 }
 
-tmpY = [
-  frLow1,
-  frMedium1,
-  frHigh1,
-  frLow2,
-  frMedium2,
-  frHigh2,
-  frLow3,
-  frMedium3,
-  frHigh3,
-];
-
-let tmpX = [rpmLow, rpmMedium, rpmHigh];
-tmpX = tmpX.concat(tmpX, tmpX);
-
 calculateButton.addEventListener("click", (event) => {
+  const rpmLow = parseFloat(rpmLowInput.value || rpmLowInput.placeholder);
+  const rpmMedium = parseFloat(
+    rpmMediumInput.value || rpmMediumInput.placeholder
+  );
+  const rpmHigh = parseFloat(rpmHighInput.value || rpmHighInput.placeholder);
+
+  const frLow1 = parseFloat(frLow1Input.value);
+  const frLow2 = parseFloat(frLow2Input.value);
+  const frLow3 = parseFloat(frLow3Input.value);
+
+  const frMedium1 = parseFloat(frMedium1Input.value);
+  const frMedium2 = parseFloat(frMedium2Input.value);
+  const frMedium3 = parseFloat(frMedium3Input.value);
+
+  const frHigh1 = parseFloat(frHigh1Input.value);
+  const frHigh2 = parseFloat(frHigh2Input.value);
+  const frHigh3 = parseFloat(frHigh3Input.value);
+
+  const targetFr1 = parseFloat(
+    targetFr1Input.value || targetFr1Input.placeholder
+  );
+  const targetFr2 = parseFloat(
+    targetFr2Input.value || targetFr2Input.placeholder
+  );
+  const targetFr3 = parseFloat(
+    targetFr3Input.value || targetFr3Input.placeholder
+  );
+  const targetFr4 = parseFloat(
+    targetFr4Input.value || targetFr4Input.placeholder
+  );
+  const targetFr5 = parseFloat(
+    targetFr5Input.value || targetFr5Input.placeholder
+  );
+
+  const data = {
+    x: [],
+    y: [],
+  };
+
+  tmpY = [
+    frLow1,
+    frMedium1,
+    frHigh1,
+    frLow2,
+    frMedium2,
+    frHigh2,
+    frLow3,
+    frMedium3,
+    frHigh3,
+  ];
+
+  let tmpX = [rpmLow, rpmMedium, rpmHigh];
+  tmpX = tmpX.concat(tmpX, tmpX);
+
   for (let i = 0; i < tmpY.length; i++) {
     if (!isNaN(tmpY[i])) {
       data.x = [...data.x, tmpX[i]];
       data.y = [...data.y, tmpY[i]];
     }
   }
+
+  if (
+    (Array.isArray(data.x) && data.x.length == 0) ||
+    (Array.isArray(data.y) && data.y.length == 0)
+  ) {
+    return;
+  }
+
   result = LinearRegression(data);
 
   const axes = document.querySelector("#axes");
