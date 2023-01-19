@@ -175,21 +175,26 @@ calculateButton.addEventListener("click", (event) => {
   };
   Plotly.newPlot(axes, [trace1, trace2]);
 
-  resultRpm1Input.value = (targetFr1 * result.slope + result.intercept).toFixed(
-    1
-  );
-  resultRpm2Input.value = (targetFr2 * result.slope + result.intercept).toFixed(
-    1
-  );
-  resultRpm3Input.value = (targetFr3 * result.slope + result.intercept).toFixed(
-    1
-  );
-  resultRpm4Input.value = (targetFr4 * result.slope + result.intercept).toFixed(
-    1
-  );
-  resultRpm5Input.value = (targetFr5 * result.slope + result.intercept).toFixed(
-    1
-  );
+  resultRpm1Input.value = (
+    (targetFr1 - result.intercept) /
+    result.slope
+  ).toFixed(1);
+  resultRpm2Input.value = (
+    (targetFr2 - result.intercept) /
+    result.slope
+  ).toFixed(1);
+  resultRpm3Input.value = (
+    (targetFr3 - result.intercept) /
+    result.slope
+  ).toFixed(1);
+  resultRpm4Input.value = (
+    (targetFr4 - result.intercept) /
+    result.slope
+  ).toFixed(1);
+  resultRpm5Input.value = (
+    (targetFr5 - result.intercept) /
+    result.slope
+  ).toFixed(1);
 
   resultEquationInput.innerHTML = `Y = ${result.slope.toFixed(
     2
