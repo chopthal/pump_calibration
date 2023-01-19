@@ -7,74 +7,88 @@
     <title>Document</title>
     <script src="plotly-2.17.1.min.js"></script>
     <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div>
-      <h1>Pump Calibration</h1>
-      <div>
+    <main>
+      <section class="measure">
+        <h1>Pump Calibration</h1>
         <div>
           <h3>Measured RPM vs Flow Rate (ul/min)</h3>
-          <div>
+          <article>
             <p>RPM</p>
-            <input type="number" placeholder="6" id="rpm-low" />
-            <input type="number" placeholder="10" id="rpm-medium" />
-            <input type="number" placeholder="14" id="rpm-high" />
-          </div>
-          <div>
+            <div class="input-box-measure">
+              <input type="number" placeholder="6" id="rpm-low" />
+              <input type="number" placeholder="10" id="rpm-medium" />
+              <input type="number" placeholder="14" id="rpm-high" />
+            </div>
+          </article>
+          <article>
             <p>Flow Rate</p>
-            <input type="number" id="fr1-low" />
-            <input type="number" id="fr1-medium" />
-            <input type="number" id="fr1-high" />
-          </div>
-          <div>
+            <div class="input-box-measure">
+              <input type="number" id="fr1-low" />
+              <input type="number" id="fr1-medium" />
+              <input type="number" id="fr1-high" />
+            </div>
+          </article>
+          <article>
             <p>Flow Rate (#2)</p>
-            <input type="number" id="fr2-low" />
-            <input type="number" id="fr2-medium" />
-            <input type="number" id="fr2-high" />
+            <div class="input-box-measure">
+              <input type="number" id="fr2-low" />
+              <input type="number" id="fr2-medium" />
+              <input type="number" id="fr2-high" />
+            </div>
+          </article>
+          <article>
+            <p>Flow Rate (#3)</p>
+            <div class="input-box-measure">
+              <input type="number" id="fr3-low" />
+              <input type="number" id="fr3-medium" />
+              <input type="number" id="fr3-high" />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h3>Calculated RPM on target Flow Rate</h3>
+
+        <article class="calculate">
+          <div>
+            <p>Target Flow Rate</p>
+            <div class="input-box-calculate">
+              <input type="number" placeholder="10" id="target-fr1" />
+              <input type="number" placeholder="30" id="target-fr2" />
+              <input type="number" placeholder="50" id="target-fr3" />
+              <input type="number" placeholder="70" id="target-fr4" />
+              <input type="number" placeholder="100" id="target-fr5" />
+            </div>
           </div>
           <div>
-            <p>Flow Rate (#3)</p>
-            <input type="number" id="fr3-low" />
-            <input type="number" id="fr3-medium" />
-            <input type="number" id="fr3-high" />
+            <p>Result RPM</p>
+            <div class="input-box-calculate">
+              <input readonly type="number" value="" id="result-rpm1" />
+              <input readonly type="number" value="" id="result-rpm2" />
+              <input readonly type="number" value="" id="result-rpm3" />
+              <input readonly type="number" value="" id="result-rpm4" />
+              <input readonly type="number" value="" id="result-rpm5" />
+            </div>
           </div>
-        </div>
-      </div>
+        </article>
+        <button class="calc-btn">Calculate</button>
+      </section>
 
-      <div>
-        <h3>Calculated RPM on target Flow Rate</h3>
-        <div>
-          <p>Target Flow Rate</p>
-          <input type="number" placeholder="10" id="target-fr1" />
-          <input type="number" placeholder="30" id="target-fr2" />
-          <input type="number" placeholder="50" id="target-fr3" />
-          <input type="number" placeholder="70" id="target-fr4" />
-          <input type="number" placeholder="100" id="target-fr5" />
-        </div>
-
-        <div>
-          <p>Result RPM</p>
-          <input readonly type="number" value="" id="result-rpm1" />
-          <input readonly type="number" value="" id="result-rpm2" />
-          <input readonly type="number" value="" id="result-rpm3" />
-          <input readonly type="number" value="" id="result-rpm4" />
-          <input readonly type="number" value="" id="result-rpm5" />
-        </div>
-      </div>
-    </div>
-    <div>
-      <button class="calc-btn">Calculate</button>
-    </div>
-
-    <div>
-      <h3>Fitting Result</h3>
-      <ul>
-        <li>
-          <span>Equation :</span><span class="result-eq">y = mx + b</span>
-        </li>
-        <li><span>R-square :</span><span class="result-rsq">NaN</span></li>
-      </ul>
-    </div>
-    <div id="axes" style="width: 700px; height: 400px"></div>
+      <section class="result">
+        <h3>Fitting Result</h3>
+        <ul>
+          <li>
+            <span>Equation :</span><span class="result-eq">y = mx + b</span>
+          </li>
+          <li><span>R-square :</span><span class="result-rsq">NaN</span></li>
+        </ul>
+        <!-- <div id="axes" style="width: 700px; height: 400px"></div> -->
+        <div id="axes"></div>
+      </section>
+    </main>
   </body>
 </html>
