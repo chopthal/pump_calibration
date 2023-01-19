@@ -22,15 +22,15 @@
           </div>
           <div>
             <p>Flow Rate</p>
-            <input type="number" id="fr1-low" value="12" />
-            <input type="number" id="fr1-medium" value="20" />
-            <input type="number" id="fr1-high" value="28" />
+            <input type="number" id="fr1-low" />
+            <input type="number" id="fr1-medium" />
+            <input type="number" id="fr1-high" />
           </div>
           <div>
             <p>Flow Rate (#2)</p>
-            <input type="number" id="fr2-low" value="10" />
-            <input type="number" id="fr2-medium" value="22" />
-            <input type="number" id="fr2-high" value="26.5" />
+            <input type="number" id="fr2-low" />
+            <input type="number" id="fr2-medium" />
+            <input type="number" id="fr2-high" />
           </div>
           <div>
             <p>Flow Rate (#3)</p>
@@ -45,25 +45,25 @@
         <h3>Calculated RPM on target Flow Rate</h3>
         <div>
           <p>Target Flow Rate</p>
-          <input type="number" value="10" id="target-fr1" />
-          <input type="number" value="30" id="target-fr2" />
-          <input type="number" value="50" id="target-fr3" />
-          <input type="number" value="70" id="target-fr4" />
-          <input type="number" value="100" id="target-fr5" />
+          <input type="number" placeholder="10" id="target-fr1" />
+          <input type="number" placeholder="30" id="target-fr2" />
+          <input type="number" placeholder="50" id="target-fr3" />
+          <input type="number" placeholder="70" id="target-fr4" />
+          <input type="number" placeholder="100" id="target-fr5" />
         </div>
 
         <div>
           <p>Result RPM</p>
-          <input type="number" value="" id="result-rpm1" />
-          <input type="number" value="" id="result-rpm2" />
-          <input type="number" value="" id="result-rpm3" />
-          <input type="number" value="" id="result-rpm4" />
-          <input type="number" value="" id="result-rpm5" />
+          <input readonly type="number" value="" id="result-rpm1" />
+          <input readonly type="number" value="" id="result-rpm2" />
+          <input readonly type="number" value="" id="result-rpm3" />
+          <input readonly type="number" value="" id="result-rpm4" />
+          <input readonly type="number" value="" id="result-rpm5" />
         </div>
       </div>
     </div>
     <div>
-      <button>Calculate</button>
+      <button class="calc-btn">Calculate</button>
     </div>
     <div id="axes" style="width: 700px; height: 300px"></div>
     <div></div>
