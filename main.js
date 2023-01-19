@@ -122,8 +122,8 @@ calculateButton.addEventListener("click", (event) => {
   );
 
   const data = {
-    x: [],
-    y: [],
+    x: [0],
+    y: [0],
   };
 
   tmpY = [
@@ -172,9 +172,19 @@ calculateButton.addEventListener("click", (event) => {
   };
   Plotly.newPlot(axes, [trace1, trace2]);
 
-  resultRpm1Input.value = targetFr1 * result.slope + result.intercept;
-  resultRpm2Input.value = targetFr2 * result.slope + result.intercept;
-  resultRpm3Input.value = targetFr3 * result.slope + result.intercept;
-  resultRpm4Input.value = targetFr4 * result.slope + result.intercept;
-  resultRpm5Input.value = targetFr5 * result.slope + result.intercept;
+  resultRpm1Input.value = (targetFr1 * result.slope + result.intercept).toFixed(
+    1
+  );
+  resultRpm2Input.value = (targetFr2 * result.slope + result.intercept).toFixed(
+    1
+  );
+  resultRpm3Input.value = (targetFr3 * result.slope + result.intercept).toFixed(
+    1
+  );
+  resultRpm4Input.value = (targetFr4 * result.slope + result.intercept).toFixed(
+    1
+  );
+  resultRpm5Input.value = (targetFr5 * result.slope + result.intercept).toFixed(
+    1
+  );
 });
