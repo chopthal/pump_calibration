@@ -25,6 +25,9 @@ const resultRpm3Input = document.querySelector("#result-rpm3");
 const resultRpm4Input = document.querySelector("#result-rpm4");
 const resultRpm5Input = document.querySelector("#result-rpm5");
 
+const resultEquationInput = document.querySelector(".result-eq");
+const resultRsquareInput = document.querySelector(".result-rsq");
+
 const utils = {
   sum: (arr) => arr.reduce((total, amount) => total + amount),
   avg: (arr) => utils.sum(arr) / arr.length,
@@ -187,4 +190,12 @@ calculateButton.addEventListener("click", (event) => {
   resultRpm5Input.value = (targetFr5 * result.slope + result.intercept).toFixed(
     1
   );
+
+  resultEquationInput.innerHTML = `Y = ${result.slope.toFixed(
+    2
+  )}X + ${result.intercept.toFixed(2)}`;
+  resultRsquareInput.innerHTML = rSquared(data.x, data.y, [
+    result.intercept,
+    result.slope,
+  ]).toFixed(2);
 });
