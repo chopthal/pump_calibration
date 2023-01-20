@@ -28,66 +28,52 @@ const resultRpm5Input = document.querySelector("#result-rpm5");
 const resultEquationInput = document.querySelector(".result-eq");
 const resultRsquareInput = document.querySelector(".result-rsq");
 
+const includingCheckbox = document.querySelector("#including-checkbox");
+
 const utils = {
   sum: (arr) => arr.reduce((total, amount) => total + amount),
   avg: (arr) => utils.sum(arr) / arr.length,
 };
 
-const LinearRegression = (data) => {
-  let x_avg, // average of independent variable x
-    y_avg, // average of dependent variable y
+const linearRegression = (data) => {
+  let xAvg, // Avg of independent variable x
+    yAvg, // Avg of dependent variable y
     num, // numerator : Sum of (xi - x)(yi - y)
     den, // denominator : (xi - x)**2
     m, // slope
-    b, // intercept
-    sse; // the sum of squared error: sum of (y - (mx + b))
+    b = 0, // intercept
+    ssr, // the sum of squared error: sum of (y - (mx + b))
+    sst, // total sum of squares
+    rSq; // R-square
 
-  x_avg = utils.avg(data.x);
-  y_avg = utils.avg(data.y);
-  num = utils.sum(data.x.map((x, i) => (x - x_avg) * (data.y[i] - y_avg)));
-  den = utils.sum(data.x.map((x) => (x - x_avg) ** 2));
+  xAvg = utils.avg(data.x);
+  yAvg = utils.avg(data.y);
+  num = utils.sum(data.x.map((x, i) => (x - xAvg) * (data.y[i] - yAvg)));
+  den = utils.sum(data.x.map((x) => (x - xAvg) ** 2));
 
   if (num === 0 && den === 0) {
     m = 0;
-    // b = data.x[0];
-    b = 0;
+    if (!includingCheckbox.checked) {
+      b = data.x[0];
+    }
   } else {
     m = num / den;
-    // b = y_avg - m * x_avg;
-    b = 0;
+    if (!includingCheckbox.checked) {
+      b = yAvg - m * xAvg;
+    }
   }
 
-  sse = utils.sum(data.y.map((y, i) => (y - (m * data.x[i] + b)) * 2));
+  ssr = utils.sum(data.y.map((y, i) => Math.pow(y - (m * data.x[i] + b), 2)));
+  sst = utils.sum(data.y.map((y) => Math.pow(y - yAvg, 2)));
+  rSq = 1 - ssr / sst;
 
   return {
     slope: m,
     intercept: b,
     y: `${m}x + ${b}`,
-    SSE: `${sse}`,
+    rSq,
   };
 };
-
-function rSquared(x, y, coefficients) {
-  // y = coeffcients[0] + coeffcients[1] * x;
-  let regressionSquaredError = 0;
-  let totalSquaredError = 0;
-
-  function yPrediction(x, coefficients) {
-    return coefficients[0] + coefficients[1] * x;
-  }
-
-  let yMean = y.reduce((a, b) => a + b) / y.length;
-
-  for (let i = 0; i < x.length; i++) {
-    regressionSquaredError += Math.pow(
-      y[i] - yPrediction(x[i], coefficients),
-      2
-    );
-    totalSquaredError += Math.pow(y[i] - yMean, 2);
-  }
-
-  return 1 - regressionSquaredError / totalSquaredError;
-}
 
 calculateButton.addEventListener("click", (event) => {
   const rpmLow = parseFloat(rpmLowInput.value || rpmLowInput.placeholder);
@@ -125,11 +111,11 @@ calculateButton.addEventListener("click", (event) => {
   );
 
   const data = {
-    x: [0],
-    y: [0],
+    x: [],
+    y: [],
   };
 
-  tmpY = [
+  const tmpY = [
     frLow1,
     frMedium1,
     frHigh1,
@@ -158,7 +144,12 @@ calculateButton.addEventListener("click", (event) => {
     return;
   }
 
-  result = LinearRegression(data);
+  if (includingCheckbox.checked) {
+    data.x = [0, ...data.x];
+    data.y = [0, ...data.y];
+  }
+
+  result = linearRegression(data);
 
   const axes = document.querySelector("#axes");
   const trace1 = {
@@ -199,8 +190,5 @@ calculateButton.addEventListener("click", (event) => {
   resultEquationInput.innerHTML = `Y = ${result.slope.toFixed(
     2
   )}X + ${result.intercept.toFixed(2)}`;
-  resultRsquareInput.innerHTML = rSquared(data.x, data.y, [
-    result.intercept,
-    result.slope,
-  ]).toFixed(2);
+  resultRsquareInput.innerHTML = result.rSq.toFixed(2);
 });

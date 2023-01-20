@@ -53,7 +53,7 @@ section article {
 .calc-btn {
   width: 83vw;
   height: 10vw;
-  margin-top: 10px;
+  margin-top: 2px;
 }
 
 .result {
@@ -66,4 +66,11 @@ section article {
 #axes {
   width: 120vw;
   height: 100vw;
+}
+
+.including {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-left: 10px;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>icluebio_pump_cal</title>
     <script src="plotly-2.17.1.min.js"></script>
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css" />
@@ -75,6 +75,10 @@
             </div>
           </div>
         </article>
+        <div class="including">
+          <input type="checkbox" id="including-checkbox" />
+          <label for="including-checkbox">Including (0, 0) & b = 0</label>
+        </div>
         <button class="calc-btn">Calculate</button>
       </section>
 
@@ -86,7 +90,6 @@
           </li>
           <li><span>R-square :</span><span class="result-rsq">NaN</span></li>
         </ul>
-        <!-- <div id="axes" style="width: 140%; height: 100vw"></div> -->
         <div id="axes"></div>
       </section>
     </main>
